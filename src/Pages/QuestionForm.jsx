@@ -72,7 +72,7 @@ const QuestionForm = () => {
     const handleQuizAdd=()=>{
         const quizDetails={
             quizName,
-            quizId:quizList.length,
+            quizId:quizList?.length,
             quizQuestions:allQuestion,
         }
         // console.log(quizDetails);
