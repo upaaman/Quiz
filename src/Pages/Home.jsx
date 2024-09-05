@@ -31,7 +31,7 @@ const Home = () => {
                                 key={item.quizId}
                             >
                                 <span>Quiz Name :  {item?.quizName}  </span>
-                                <span>Number of Questions :  {item?.quizquestions?.length}  </span>
+                                <span>Number of Questions :  {item?.quizQuestions?.length}  </span>
                                 <div className="flex gap-3">
                                 <button>Edit</button>
                                 <button
