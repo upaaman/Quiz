@@ -1,13 +1,14 @@
 import { useState } from "react"
 
 
-const QuestionItem = ({ item ,setScore}) => {
+const QuestionItem = ({ item ,setScore,setNoQuesAttempted}) => {
     const [selectedOption, setSelectedOption] = useState(-1);
     const [isQuestionSubmitted, setIsQuestionSubmitted] = useState(false);
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
 
 
     const handleSubmitAnswer = (selectedOption) => {
+        setNoQuesAttempted(prev=>prev+1);
         if (selectedOption == item?.correctOption) {
             setIsAnswerCorrect(true)
             setScore(prev=>prev+1)

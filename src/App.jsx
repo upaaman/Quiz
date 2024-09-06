@@ -4,6 +4,7 @@ import Home from "./Pages/Home"
 import QuizPlay from "./Pages/QuizPlay"
 import QuestionForm from "./Pages/QuestionForm"
 import TotalScore from "./Pages/TotalScore"
+import EditPage from "./Pages/EditPage"
 
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
           <Route path="/addquiz" element={<QuestionForm/>}/>
           <Route path="/playquiz" element={<QuizPlay/>}/>
           <Route path="/scorepage" element={<TotalScore/>}/>
+          <Route path="/editpage" element={<EditPage/>}/>
         </Routes>
     </div>
   )

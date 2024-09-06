@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const QuestionForm = () => {
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const [questionText, setQuestionText] = useState("");
     const [option1, setOption1] = useState("");
     const [option2, setOption2] = useState("");
@@ -15,72 +15,103 @@ const QuestionForm = () => {
     const [option4, setOption4] = useState("");
     const [correctOption, setCorrectOption] = useState("");
     const [allQuestion, setAllQuestion] = useState([]);
-    const [quizName,setQuizName]=useState("");
+    const [quizName, setQuizName] = useState("");
     const { quizList } = useSelector((state) => state.quiz);
-    const dispatch=useDispatch();
-    const notifyQuestion=()=>toast.success('Question Added!', {
+    const dispatch = useDispatch();
+
+
+    const notifyQuestion = () => toast.success('Question Added!', {
         position: "top-right",
-        autoClose: 4000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });
-    const notifyQuiz=()=>toast("Quiz Added!!")
+    });
+
+
+    const addAllFields = () => toast.error('Please Add All Fields!', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+    const addQuestionsInQuiz = () => toast.error('Add atleast one question in Quiz!!', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
+    const notifyQuiz = () => toast("Quiz Added!!")
 
     const handleSubmitQuestion = (e) => {
         e.preventDefault();
-        const questionDetails = {
-            questionId: allQuestion.length,
-            questionText,
-            correctOption,
-            options: [
-                {
-                    optionId: 1,
-                    optionText: option1
-                },
-                {
-                    optionId: 2,
-                    optionText: option2
-                },
-                {
-                    optionId: 3,
-                    optionText: option3
-                },
-                {
-                    optionId: 4,
-                    optionText: option4
-                },
-
-            ],
+        if (option1 == "" || option2 == "" || option3 == "" || option4 == "" || quizName == "" || questionText == "" || correctOption == "") {
+            addAllFields();
         }
-        // console.log(questionDetails)
-        setAllQuestion(prev => [...prev, questionDetails]);
-        notifyQuestion();
-            
+        else {
+            const questionDetails = {
+                questionId: allQuestion.length,
+                questionText,
+                correctOption,
+                options: [
+                    {
+                        optionId: 1,
+                        optionText: option1
+                    },
+                    {
+                        optionId: 2,
+                        optionText: option2
+                    },
+                    {
+                        optionId: 3,
+                        optionText: option3
+                    },
+                    {
+                        optionId: 4,
+                        optionText: option4
+                    },
 
+                ],
+            }
+            // console.log(questionDetails)
+            setAllQuestion(prev => [...prev, questionDetails]);
+            notifyQuestion();
 
-        setOption1("");
-        setOption2("");
-        setOption3("");
-        setOption4("");
-        setQuestionText("");
+            setOption1("");
+            setOption2("");
+            setOption3("");
+            setOption4("");
+            setQuestionText("");
+        }
     }
 
 
-    const handleQuizAdd=()=>{
-        const quizDetails={
-            quizName,
-            quizId:quizList?.length,
-            quizQuestions:allQuestion,
+    const handleQuizAdd = () => {
+        if (allQuestion.length === 0) {
+            addQuestionsInQuiz();
         }
-        // console.log(quizDetails);
-        dispatch(addQuiz(quizDetails))
-        setAllQuestion([]);
-        setQuizName("");
-        notifyQuiz();
-        navigate('/');
+        else {
+            const quizDetails = {
+                quizName,
+                quizId: quizList?.length,
+                quizQuestions: allQuestion,
+            }
+            // console.log(quizDetails);
+            dispatch(addQuiz(quizDetails))
+            setAllQuestion([]);
+            setQuizName("");
+            notifyQuiz();
+            navigate('/');
+        }
         // console.log(quizList)
 
 
@@ -90,12 +121,12 @@ const QuestionForm = () => {
             <div className="flex w-full justify-around">
                 <div>Add your questions here</div>
                 <button
-                    onClick={()=>handleQuizAdd()}
+                    onClick={() => handleQuizAdd()}
                 >
                     Done
                 </button>
             </div>
-                <label > <span>QuizName</span> <input type="text" placeholder="Your quiz name"  onChange={e=>setQuizName(e.target.value)} value={quizName} /> </label>
+            <label > <span>QuizName</span> <input type="text" placeholder="Your quiz name" onChange={e => setQuizName(e.target.value)} value={quizName} /> </label>
             <form
                 onSubmit={(e) => handleSubmitQuestion(e)}
                 className="flex flex-col gap-5 mt-10 items-center justify-center">

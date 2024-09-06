@@ -1,19 +1,13 @@
-import { useDispatch, useSelector } from "react-redux"
-import { setCurrentPlayingQuiz } from "../redux/QuizSlice";
+import {useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
+import QuizCard from "../Component/QuizCard";
 
 
 
 const Home = () => {
-    const dispatch=useDispatch();
+
     const navigate=useNavigate();
     const { quizList } = useSelector(state => state.quiz);
-
-
-    const handlePlayQuiz=(item)=>{
-        dispatch(setCurrentPlayingQuiz(item));
-        navigate('playquiz')
-    }
 
     return (
         <div className=" flex flex-col">
@@ -28,20 +22,8 @@ const Home = () => {
                 <div>Total Quizes : {quizList?.length}</div>
                 <div className="flex flex-wrap gap-5 items-center justify-center mt-10">
                     {
-                        quizList.map((item) =>
-                            <div
-                                className="flex flex-col gap-5 p-5 w-[300px] h-[200px] bg-purple-200"
-                                key={item.quizId}
-                            >
-                                <span>Quiz Name :  {item?.quizName}  </span>
-                                <span>Number of Questions :  {item?.quizQuestions?.length}  </span>
-                                <div className="flex gap-3">
-                                <button>Edit</button>
-                                <button
-                                onClick={()=>handlePlayQuiz(item)}
-                                >Start</button>
-                                </div>
-                            </div>
+                        quizList?.map((item) =>
+                           <QuizCard key={item.quizId} item={item}/>
                         )
                     }
                 </div>
