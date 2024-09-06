@@ -8,15 +8,23 @@ import EditPage from "./Pages/EditPage"
 
 
 const App = () => {
+
+
+
+    
+      
+      
+
+  
   return (
     <div>
-        <Routes>
-          <Route path="/*" element={<Home/>}/>
-          <Route path="/addquiz" element={<QuestionForm/>}/>
-          <Route path="/playquiz" element={<QuizPlay/>}/>
-          <Route path="/scorepage" element={<TotalScore/>}/>
-          <Route path="/editpage" element={<EditPage/>}/>
-        </Routes>
+      <Routes>
+        <Route path="/*" element={<Home />} />
+        <Route path="/addquiz" element={<QuestionForm />} />
+        <Route path="/playquiz" element={<QuizPlay />} />
+        <Route path="/scorepage" element={<TotalScore />} />
+        <Route path="/editpage" element={<EditPage />} />
+      </Routes>
     </div>
   )
 }
